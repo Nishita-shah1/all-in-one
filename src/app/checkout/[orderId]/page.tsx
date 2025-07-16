@@ -18,18 +18,21 @@ export default function CheckoutPage({ params }: CheckoutPageProps) {
 
   const order = orders.find(o => o.id === params.orderId);
 
-  useEffect(() => {
-    if (!user) {
-      router.push('/auth/login');
-      return;
-    }
-    if (!order) {
-      router.push('/orders/placed');
-      return;
-    }
-  }, [user, order, router]);
-
-  if (!user || !order) return null;
+  if (!order) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-gray-800 mb-4">Order not found</h1>
+          <button
+            onClick={() => router.push('/orders/placed')}
+            className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
+          >
+            View Orders
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const handlePayment = async () => {
     setPaymentStatus('processing');

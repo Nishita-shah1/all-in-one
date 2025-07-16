@@ -10,19 +10,6 @@ export default function ReceivedOrdersPage() {
   const { user, getOrdersByUser, updateOrderStatus, assignVehicle } = useUser();
   const router = useRouter();
 
-  useEffect(() => {
-    if (!user) {
-      router.push('/auth/login');
-      return;
-    }
-    if (user.role === 'buyer') {
-      router.push('/dashboard/buyer');
-      return;
-    }
-  }, [user, router]);
-
-  if (!user) return null;
-
   const receivedOrders = getOrdersByUser(user.id, 'seller');
 
   const handleUpdateStatus = (orderId: string, status: any) => {

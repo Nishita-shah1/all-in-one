@@ -10,20 +10,6 @@ import { useEffect } from 'react';
 export default function WholesalerDashboard() {
   const { user, cart, getProductsByFarmer, getOrdersByUser } = useUser();
   const [activeTab, setActiveTab] = useState<'selling' | 'buying'>('selling');
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!user) {
-      router.push('/auth/login');
-      return;
-    }
-    if (user.role !== 'both') {
-      router.push('/');
-      return;
-    }
-  }, [user, router]);
-
-  if (!user) return null;
 
   const myProducts = getProductsByFarmer(user.id);
   const sellOrders = getOrdersByUser(user.id, 'seller');

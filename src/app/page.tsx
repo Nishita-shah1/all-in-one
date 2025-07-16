@@ -7,29 +7,6 @@ import { Tractor, Users, Truck, ShoppingCart, Package, TrendingUp } from 'lucide
 export default function Home() {
   const { user } = useUser();
 
-  if (user) {
-    // Redirect to appropriate dashboard based on role
-    const dashboardPath = user.role === 'farmer' ? '/dashboard/farmer' : 
-                         user.role === 'buyer' ? '/dashboard/buyer' : 
-                         '/dashboard/wholesaler';
-    
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">
-            Welcome back, {user.name}!
-          </h1>
-          <Link
-            href={dashboardPath}
-            className="bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors"
-          >
-            Go to Dashboard
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
       {/* Hero Section */}
@@ -45,16 +22,22 @@ export default function Home() {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/auth/register"
+              href="/dashboard/farmer"
               className="bg-green-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors"
             >
-              Get Started
+              Farmer Dashboard
             </Link>
             <Link
-              href="/auth/login"
+              href="/dashboard/buyer"
               className="bg-white text-green-600 border-2 border-green-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-green-50 transition-colors"
             >
-              Login
+              Buyer Dashboard
+            </Link>
+            <Link
+              href="/dashboard/wholesaler"
+              className="bg-purple-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-purple-700 transition-colors"
+            >
+              Wholesaler Dashboard
             </Link>
           </div>
         </div>
@@ -183,10 +166,10 @@ export default function Home() {
             Join thousands of farmers, buyers, and wholesalers already using AgriConnect
           </p>
           <Link
-            href="/auth/register"
+            href="/dashboard/farmer"
             className="bg-white text-green-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors"
           >
-            Start Your Journey Today
+            Get Started Today
           </Link>
         </div>
       </section>

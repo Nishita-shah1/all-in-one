@@ -13,19 +13,6 @@ export default function ManageProductsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
 
-  useEffect(() => {
-    if (!user) {
-      router.push('/auth/login');
-      return;
-    }
-    if (user.role === 'buyer') {
-      router.push('/dashboard/buyer');
-      return;
-    }
-  }, [user, router]);
-
-  if (!user) return null;
-
   const myProducts = getProductsByFarmer(user.id);
   const filteredProducts = myProducts.filter(product =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

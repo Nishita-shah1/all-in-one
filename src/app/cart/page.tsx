@@ -12,19 +12,6 @@ export default function CartPage() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    if (!user) {
-      router.push('/auth/login');
-      return;
-    }
-    if (user.role === 'farmer') {
-      router.push('/dashboard/farmer');
-      return;
-    }
-  }, [user, router]);
-
-  if (!user) return null;
-
   const totalAmount = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 

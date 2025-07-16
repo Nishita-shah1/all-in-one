@@ -26,19 +26,6 @@ export default function AddProductPage() {
   });
   const router = useRouter();
 
-  useEffect(() => {
-    if (!user) {
-      router.push('/auth/login');
-      return;
-    }
-    if (user.role === 'buyer') {
-      router.push('/dashboard/buyer');
-      return;
-    }
-  }, [user, router]);
-
-  if (!user) return null;
-
   const categories = [
     'Grains', 'Vegetables', 'Fruits', 'Pulses', 'Spices', 'Dairy', 'Organic', 'Seeds'
   ];

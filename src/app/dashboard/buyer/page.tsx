@@ -8,20 +8,6 @@ import { useEffect } from 'react';
 
 export default function BuyerDashboard() {
   const { user, cart, getOrdersByUser } = useUser();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!user) {
-      router.push('/auth/login');
-      return;
-    }
-    if (user.role !== 'buyer' && user.role !== 'both') {
-      router.push('/');
-      return;
-    }
-  }, [user, router]);
-
-  if (!user) return null;
 
   const myOrders = getOrdersByUser(user.id, 'buyer');
   const totalSpent = myOrders

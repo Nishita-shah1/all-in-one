@@ -12,20 +12,6 @@ export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedLocation, setSelectedLocation] = useState('');
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!user) {
-      router.push('/auth/login');
-      return;
-    }
-    if (user.role === 'farmer') {
-      router.push('/dashboard/farmer');
-      return;
-    }
-  }, [user, router]);
-
-  if (!user) return null;
 
   const categories = [...new Set(products.map(p => p.category))];
   const locations = [...new Set(products.map(p => p.location))];

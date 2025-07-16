@@ -8,20 +8,6 @@ import { useEffect } from 'react';
 
 export default function FarmerDashboard() {
   const { user, getProductsByFarmer, getOrdersByUser } = useUser();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!user) {
-      router.push('/auth/login');
-      return;
-    }
-    if (user.role !== 'farmer' && user.role !== 'both') {
-      router.push('/');
-      return;
-    }
-  }, [user, router]);
-
-  if (!user) return null;
 
   const myProducts = getProductsByFarmer(user.id);
   const myOrders = getOrdersByUser(user.id, 'seller');

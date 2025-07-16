@@ -88,11 +88,11 @@ export default function Navbar() {
             </div>
             
             <button
-              onClick={logout}
+              onClick={() => {}}
               className="flex items-center space-x-1 hover:text-green-200 transition-colors"
             >
               <LogOut size={18} />
-              <span className="hidden sm:block">Logout</span>
+              <span className="hidden sm:block">Settings</span>
             </button>
           </div>
         </div>

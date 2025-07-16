@@ -10,19 +10,6 @@ export default function PlacedOrdersPage() {
   const { user, getOrdersByUser } = useUser();
   const router = useRouter();
 
-  useEffect(() => {
-    if (!user) {
-      router.push('/auth/login');
-      return;
-    }
-    if (user.role === 'farmer') {
-      router.push('/dashboard/farmer');
-      return;
-    }
-  }, [user, router]);
-
-  if (!user) return null;
-
   const myOrders = getOrdersByUser(user.id, 'buyer');
 
   return (

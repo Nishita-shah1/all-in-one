@@ -264,56 +264,25 @@ const dummyVehicles: Vehicle[] = [
 ];
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>({
+    id: '1',
+    name: 'Demo User',
+    email: 'demo@example.com',
+    phone: '+91-9876543210',
+    role: 'both',
+    location: 'Delhi',
+    address: 'Demo Address, Delhi',
+    coordinates: { lat: 28.6139, lng: 77.2090 }
+  });
   const [cart, setCart] = useState<CartItem[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
   const [products, setProducts] = useState<Product[]>(dummyProducts);
   const [vehicles, setVehicles] = useState<Vehicle[]>(dummyVehicles);
   const [payments, setPayments] = useState<Payment[]>([]);
 
-  useEffect(() => {
-    const savedUser = localStorage.getItem('user');
-    const savedCart = localStorage.getItem('cart');
-    if (savedUser) setUser(JSON.parse(savedUser));
-    if (savedCart) setCart(JSON.parse(savedCart));
-  }, []);
-
-  useEffect(() => {
-    if (user) localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [user, cart]);
-
-  const login = async (email: string, password: string): Promise<boolean> => {
-    const foundUser = dummyUsers.find(u => u.email === email);
-    if (foundUser) {
-      setUser(foundUser);
-      return true;
-    }
-    return false;
-  };
-
-  const logout = () => {
-    setUser(null);
-    setCart([]);
-    localStorage.removeItem('user');
-    localStorage.removeItem('cart');
-  };
-
-  const register = async (userData: Partial<User>, password: string): Promise<boolean> => {
-    const newUser: User = {
-      id: Date.now().toString(),
-      name: userData.name || '',
-      email: userData.email || '',
-      phone: userData.phone || '',
-      role: userData.role || 'farmer',
-      location: userData.location || '',
-      address: userData.address || '',
-      coordinates: userData.coordinates || { lat: 0, lng: 0 },
-      ...userData
-    };
-    setUser(newUser);
-    return true;
-  };
+  const login = async (email: string, password: string): Promise<boolean> => true;
+  const logout = () => {};
+  const register = async (userData: Partial<User>, password: string): Promise<boolean> => true;
 
   const addToCart = (product: Product, quantity: number) => {
     setCart(prev => {
